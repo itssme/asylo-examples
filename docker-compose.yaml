@@ -1,0 +1,13 @@
+version: '3'
+services:
+  hello_world:
+    build:
+      context: .
+      dockerfile: hello_world/Dockerfile
+    environment:
+      - INPUT='Test1, Test2'
+    volumes:
+      - bazel-cache:/root/.cache/bazel
+
+volumes:
+  bazel-cache:
