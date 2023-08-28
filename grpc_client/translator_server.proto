@@ -18,22 +18,20 @@ syntax = "proto2";
 
 package examples.grpc_server;
 
-import "asylo/enclave.proto";
-
-extend asylo.EnclaveConfig {
-  // The address that the gRPC server inside the enclave will be hosted on.
-  // Required.
-  optional string server_address = 205739939;
-
-  // The port that the gRPC server should listen to. May be 0 to request that
-  // the server let the operating system choose an unused port.
-  optional int32 port = 253106740;
+// A request message containing a word to be translated.
+message GetTranslationRequest {
+  optional string input_word = 1;
 }
 
-extend asylo.EnclaveOutput {
-  // The Translator server's address.
-  optional string actual_server_address = 285084420;
-  
-  // The Translator server's port.
-  optional int32 actual_server_port = 285084421;
+// A response message containing the translation of a GetTranslationRequest's
+// input_word.
+message GetTranslationResponse {
+  optional string translated_word = 1;
+}
+
+service Translator {
+  // Translates the given word.
+  rpc GetTranslation(GetTranslationRequest) returns (GetTranslationResponse) {
+    // errors: no input word, no translation available
+  }
 }

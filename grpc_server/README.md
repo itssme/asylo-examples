@@ -294,7 +294,7 @@ ABSL_FLAG(int32_t, server_max_lifetime, 300,
 
 ABSL_FLAG(int32_t, port, 0, "Port that the server listens to");
 
-constexpr char kServerAddress[] = "localhost";
+constexpr char kServerAddress[] = "0.0.0.0";
 ```
 
 The `localhost` address indicates that the server should run locally. Default
